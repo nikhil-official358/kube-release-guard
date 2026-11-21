@@ -12,7 +12,7 @@ The [Jenkins Troubleshooting Agent](jenkins-agent/) reads build logs and provide
 
 ## Cloud capacity triage
 
-[Cloud Capacity Copilot](cloud-capacity-copilot/) compares live Kubernetes resource usage with container requests and offers optional local AI advice.
+[Docker Capacity Pilot](cloud-capacity-copilot/) compares live Kubernetes resource usage with container requests and offers optional local AI advice.
 
 ## What the gate checks
 

@@ -1,4 +1,4 @@
-# Cloud Capacity Copilot
+# Docker Capacity Pilot
 
 Read-only Kubernetes capacity triage for platform engineering and FinOps. Compare live container usage with resource requests, identify missing requests, and use a local model to suggest follow-up checks.
 
@@ -45,3 +45,18 @@ flowchart LR
     R --> J[JSON findings]
     R --> O[Local Ollama advice]
 ```
+
+## Browser dashboard
+
+In the terminal that can reach your cluster, run:
+
+```cmd
+python dashboard.py --context capacity-demo --namespace kube-system
+```
+
+Open http://127.0.0.1:8765/. The dashboard refreshes every 15 seconds and uses your existing Kubernetes access. Use `python dashboard.py --demo` to view bundled data or add `--ollama qwen2.5:1.5b` to show local model advice. Press Ctrl+C to stop the dashboard.
+
+Use the investigation panel to ask about missing requests, high or low usage, or a specific container. Its answers use rules and filter the evidence table. Optional Ollama advice appears separately.
+
+The dashboard polls the snapshot API without reloading the page. Pause freezes polling and Refresh collects a new snapshot. The history chart tracks finding counts for up to 30 collections in the current tab. Search and resource filters narrow the evidence queue, and selecting a finding opens its details. Export JSON saves the full current snapshot.
+Sort the evidence queue by utilization or container name. Export filtered CSV for the visible findings, or JSON for the full snapshot.
