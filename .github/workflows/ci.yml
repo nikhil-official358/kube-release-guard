@@ -37,6 +37,6 @@ jobs:
           set -euo pipefail
           docker run -d --rm --name release-demo --read-only --cap-drop ALL --security-opt no-new-privileges -p 127.0.0.1:8080:8080 release-demo:ci
           trap 'docker stop release-demo' EXIT
-          curl --fail --retry 10 --retry-connrefused http://localhost:8080/readyz
-          curl --fail http://localhost:8080/ | python -c 'import json,os,sys; assert json.load(sys.stdin)["version"] == os.environ["GITHUB_SHA"]'
-          curl --fail http://localhost:8080/metrics | grep -Fx 'release_demo_requests_total 1'
+          curl --fail --retry 10 --retry-all-errors --retry-delay 1 --retry-max-time 15 --max-time 2 http://127.0.0.1:8080/readyz
+          curl --fail http://127.0.0.1:8080/ | python -c 'import json,os,sys; assert json.load(sys.stdin)["version"] == os.environ["GITHUB_SHA"]'
+          curl --fail http://127.0.0.1:8080/metrics | grep -Fx 'release_demo_requests_total 1'
