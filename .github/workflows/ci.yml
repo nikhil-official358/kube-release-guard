@@ -16,6 +16,9 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s tests -v
+      - name: Test Jenkins troubleshooting agent
+        working-directory: jenkins-agent
+        run: python -m unittest -v
       - name: Audit Kubernetes manifests
         shell: bash
         run: |

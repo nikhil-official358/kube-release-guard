@@ -6,6 +6,10 @@ Kube Release Guard checks Kubernetes Deployment manifests in CI and demonstrates
 
 ![Release architecture showing manifest rendering, policy checks, image scanning, and runtime health](docs/architecture.svg)
 
+## Jenkins troubleshooting
+
+The [Jenkins Troubleshooting Agent](jenkins-agent/) reads build logs and provides evidence-based diagnosis with optional local Ollama advice.
+
 ## What the gate checks
 
 | Area | Release checks |

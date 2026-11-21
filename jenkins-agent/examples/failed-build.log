@@ -1,0 +1,6 @@
+Started by local fixture
+[Pipeline] sh
++ docker build -t release-demo .
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock
+ERROR: script returned exit code 1
+Finished: FAILURE
