@@ -10,6 +10,10 @@ Kube Release Guard checks Kubernetes Deployment manifests in CI and demonstrates
 
 The [Jenkins Troubleshooting Agent](jenkins-agent/) reads build logs and provides evidence-based diagnosis with optional local Ollama advice.
 
+## Cloud capacity triage
+
+[Cloud Capacity Copilot](cloud-capacity-copilot/) compares live Kubernetes resource usage with container requests and offers optional local AI advice.
+
 ## What the gate checks
 
 | Area | Release checks |

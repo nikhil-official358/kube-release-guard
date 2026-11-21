@@ -1,0 +1,46 @@
+{
+  "observed_at": "2026-01-01T00:00:10+00:00",
+  "pods": {
+    "items": [
+      {
+        "metadata": {
+          "name": "checkout-demo"
+        },
+        "status": {
+          "phase": "Running"
+        },
+        "spec": {
+          "containers": [
+            {
+              "name": "api",
+              "resources": {
+                "requests": {
+                  "cpu": "500m"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "metrics": {
+    "items": [
+      {
+        "metadata": {
+          "name": "checkout-demo"
+        },
+        "timestamp": "2026-01-01T00:00:05Z",
+        "containers": [
+          {
+            "name": "api",
+            "usage": {
+              "cpu": "50m",
+              "memory": "80Mi"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
