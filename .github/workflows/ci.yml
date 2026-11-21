@@ -1,0 +1,42 @@
+name: Release checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -v
+      - name: Audit Kubernetes manifests
+        shell: bash
+        run: |
+          set -o pipefail
+          kubectl kustomize k8s/base | python gate.py
+          kubectl kustomize k8s/overlays/ha | python gate.py
+      - name: Build demo image
+        run: docker build --build-arg APP_VERSION="$GITHUB_SHA" -t release-demo:ci .
+      - name: Scan image for fixable high and critical vulnerabilities
+        uses: aquasecurity/trivy-action@v0.35.0
+        with:
+          image-ref: release-demo:ci
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          exit-code: '1'
+      - name: Smoke test with a read-only container filesystem
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run -d --rm --name release-demo --read-only --cap-drop ALL --security-opt no-new-privileges -p 127.0.0.1:8080:8080 release-demo:ci
+          trap 'docker stop release-demo' EXIT
+          curl --fail --retry 10 --retry-connrefused http://localhost:8080/readyz
+          curl --fail http://localhost:8080/ | python -c 'import json,os,sys; assert json.load(sys.stdin)["version"] == os.environ["GITHUB_SHA"]'
+          curl --fail http://localhost:8080/metrics | grep -Fx 'release_demo_requests_total 1'
