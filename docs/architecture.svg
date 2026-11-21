@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="365" viewBox="0 0 880 365" role="img" aria-labelledby="title desc">
+  <title id="title">Kube Release Guard architecture</title>
+  <desc id="desc">GitHub Actions runs the policy and image checks. A separate local Kubernetes rollout exposes health and metrics endpoints.</desc>
+  <rect width="880" height="365" rx="22" fill="#0c1729"/>
+  <g font-family="system-ui, sans-serif" fill="#ecf4ff">
+    <text x="34" y="49" font-size="27" font-weight="700">Kube Release Guard</text>
+    <text x="34" y="84" fill="#77dccc" font-size="15" font-weight="700">GITHUB ACTIONS</text>
+    <text x="34" y="226" fill="#9ec5ff" font-size="15" font-weight="700">LOCAL KUBERNETES</text>
+    <g fill="#172b46" stroke="#365376">
+      <rect x="34" y="105" width="230" height="83" rx="12"/><rect x="325" y="105" width="230" height="83" rx="12"/><rect x="616" y="105" width="230" height="83" rx="12"/>
+      <rect x="34" y="245" width="230" height="83" rx="12"/><rect x="325" y="245" width="230" height="83" rx="12"/><rect x="616" y="245" width="230" height="83" rx="12"/>
+    </g>
+    <g font-size="17" font-weight="700">
+      <text x="50" y="137">Render manifests</text><text x="341" y="137">Enforce policy</text><text x="632" y="137">Verify container image</text>
+      <text x="50" y="277">Load local image</text><text x="341" y="277">Roll out Deployment</text><text x="632" y="277">Observe service</text>
+    </g>
+    <g font-size="13" fill="#bacce3">
+      <text x="50" y="162">Kustomize base and HA overlay</text><text x="341" y="162">Python gate and JSON findings</text><text x="632" y="162">Docker, Trivy and smoke test</text>
+      <text x="50" y="302">Docker and Minikube</text><text x="341" y="302">Hardened pods and probes</text><text x="632" y="302">Health, readiness and metrics</text>
+    </g>
+    <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#77dccc"/></marker></defs>
+    <path d="M275 146h37 M566 146h37 M275 286h37 M566 286h37" stroke="#77dccc" stroke-width="2" marker-end="url(#arrow)"/>
+  </g>
+</svg>
