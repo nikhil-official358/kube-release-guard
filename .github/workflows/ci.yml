@@ -28,7 +28,7 @@ jobs:
       - name: Build demo image
         run: docker build --build-arg APP_VERSION="$GITHUB_SHA" -t release-demo:ci .
       - name: Scan image for fixable high and critical vulnerabilities
-        uses: aquasecurity/trivy-action@v0.35.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: release-demo:ci
           severity: HIGH,CRITICAL
